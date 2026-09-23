@@ -34,7 +34,7 @@ const StatusTag = ({ type, text, errorText, mode = 'full', ...rest }: Props) => 
       break;
     case 'pending':
       icon = 'status/pending';
-      colorPalette = 'gray';
+      colorPalette = 'yellow';
       break;
   }
 

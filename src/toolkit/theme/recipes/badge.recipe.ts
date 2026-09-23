@@ -6,7 +6,7 @@ export const recipe = defineRecipe({
   base: {
     display: 'inline-flex',
     alignItems: 'center',
-    borderRadius: 'sm',
+    borderRadius: 'none',
     gap: '1',
     fontWeight: '500',
     width: 'fit-content',
@@ -15,7 +15,7 @@ export const recipe = defineRecipe({
     fontVariantNumeric: 'normal',
     userSelect: 'text',
     _loading: {
-      borderRadius: 'sm',
+      borderRadius: 'none',
     },
   },
   variants: {

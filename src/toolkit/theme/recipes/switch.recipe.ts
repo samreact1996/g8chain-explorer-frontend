@@ -98,7 +98,6 @@ export const recipe = defineSlotRecipe({
           width: 'var(--switch-height)',
           height: 'var(--switch-height)',
           scale: '0.8',
-          boxShadow: 'sm',
           _checked: {
             bg: 'white',
           },

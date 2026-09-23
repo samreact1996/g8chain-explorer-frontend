@@ -44,7 +44,8 @@ export const recipe = defineSlotRecipe({
       maxH: '100dvh',
       color: 'inherit',
       bg: 'drawer.bg',
-      boxShadow: 'drawer',
+      borderLeft: '1px solid',
+      borderColor: 'g8hairline',
       _open: {
         animationDuration: 'slowest',
         animationTimingFunction: 'ease-in-smooth',
@@ -179,7 +180,9 @@ export const recipe = defineSlotRecipe({
           padding: '4',
         },
         content: {
-          borderRadius: 'l3',
+          borderRadius: 'none',
+          border: '1px solid',
+          borderColor: 'g8hairline',
         },
       },
     },

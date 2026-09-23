@@ -6,11 +6,19 @@ export const recipe = defineRecipe({
   base: {
     display: 'flex',
     gap: 0,
-    fontWeight: 600,
-    overflow: 'hidden',
-    borderRadius: 'base',
+    // G8Chain button language: Space Mono 12px/700/uppercase with wide tracking (§5.1)
+    fontFamily: 'mono',
+    fontSize: '12px',
+    fontWeight: 700,
+    letterSpacing: '0.08em',
+    textTransform: 'uppercase' as const,
+    transition: '0.2s ease',
+    transitionProperty: 'colors',
     _disabled: {
       opacity: 'control.disabled',
+    },
+    _hover: {
+      transform: 'translateY(-2px)',
     },
   },
   variants: {
@@ -34,10 +42,10 @@ export const recipe = defineRecipe({
         },
       },
       solid_danger: {
-        bg: 'red.600',
+        bg: 'g8error',
         color: 'white',
         _hover: {
-          bg: 'red.500',
+          bg: 'g8error',
         },
         _loading: {
           opacity: 1,
@@ -48,7 +56,7 @@ export const recipe = defineRecipe({
           },
         },
         _expanded: {
-          bg: 'red.500',
+          bg: 'g8error',
         },
       },
       outline: {
@@ -72,15 +80,15 @@ export const recipe = defineRecipe({
         },
       },
       outline_danger: {
-        borderWidth: '2px',
+        borderWidth: '1px',
         borderStyle: 'solid',
         bg: 'transparent',
-        color: 'red.600',
-        borderColor: 'red.600',
+        color: 'g8error',
+        borderColor: 'g8error',
         _hover: {
           bg: 'transparent',
-          color: 'red.500',
-          borderColor: 'red.500',
+          color: 'g8error',
+          borderColor: 'g8error',
         },
         _loading: {
           opacity: 1,
@@ -234,12 +242,12 @@ export const recipe = defineRecipe({
           },
         },
         _first: {
-          borderTopLeftRadius: 'base',
-          borderBottomLeftRadius: 'base',
+          borderTopLeftRadius: 'none',
+          borderBottomLeftRadius: 'none',
         },
         _last: {
-          borderTopRightRadius: 'base',
-          borderBottomRightRadius: 'base',
+          borderTopRightRadius: 'none',
+          borderBottomRightRadius: 'none',
         },
       },
       plain: {
@@ -358,7 +366,7 @@ export const recipe = defineRecipe({
         h: 5,
         minW: 5,
         textStyle: 'xs',
-        borderRadius: 'sm',
+        borderRadius: 'none',
         gap: 1,
         _icon: { boxSize: 'auto' },
       },
@@ -367,7 +375,7 @@ export const recipe = defineRecipe({
         h: 6,
         minW: 6,
         textStyle: 'sm',
-        borderRadius: 'sm',
+        borderRadius: 'none',
         gap: 1,
         _icon: { boxSize: 'auto' },
       },
@@ -376,7 +384,7 @@ export const recipe = defineRecipe({
         h: 8,
         minW: 8,
         textStyle: 'sm',
-        borderRadius: 'base',
+        borderRadius: 'none',
         gap: 1,
         _icon: { boxSize: 'auto' },
       },
@@ -385,7 +393,7 @@ export const recipe = defineRecipe({
         h: 10,
         minW: 10,
         textStyle: 'md',
-        borderRadius: 'base',
+        borderRadius: 'none',
         gap: 2,
         _icon: { boxSize: 'auto' },
         '& .chakra-spinner': { '--spinner-size': '20px' },

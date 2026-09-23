@@ -4,121 +4,124 @@ import { defaultsDeep } from 'es-toolkit/compat';
 
 import config from 'src/config';
 
+// G8Chain design system (DESIGN_SYSTEM_G8CHAIN.md §1): light theme is pinned, so every
+// _dark pair mirrors the _light value. Primary brand color is #0C90B8 — no new hues.
 const DEFAULT_THEME_COLORS = {
   bg: {
     primary: {
+      // page background (design system §1.2); cards/panels that need pure white set it explicitly
       // for some reason links to colors.white and colors.black variables are not working here
       // so we use hex values instead
       // but it is not the case for other colors
-      _light: { value: '#FFFFFF' }, // colors.white
-      _dark: { value: '#101112' }, // colors.black
+      _light: { value: '#fbfcfa' },
+      _dark: { value: '#fbfcfa' },
     },
   },
   text: {
     primary: {
-      _light: { value: '{colors.blackAlpha.800}' },
-      _dark: { value: '{colors.whiteAlpha.800}' },
+      _light: { value: '#101828' },
+      _dark: { value: '#101828' },
     },
     secondary: {
-      _light: { value: '{colors.gray.500}' },
-      _dark: { value: '{colors.gray.400}' },
+      _light: { value: '#6e7985' },
+      _dark: { value: '#6e7985' },
     },
   },
   hover: {
-    _light: { value: '{colors.blue.400}' },
-    _dark: { value: '{colors.blue.400}' },
+    _light: { value: '#0a7495' },
+    _dark: { value: '#0a7495' },
   },
   selected: {
     control: {
       text: {
-        _light: { value: '{colors.blue.700}' },
-        _dark: { value: '{colors.gray.50}' },
+        _light: { value: '#085d78' },
+        _dark: { value: '#085d78' },
       },
       bg: {
-        _light: { value: '{colors.blue.50}' },
-        _dark: { value: '{colors.whiteAlpha.50}' },
+        _light: { value: '#e5f3f8' },
+        _dark: { value: '#e5f3f8' },
       },
     },
     option: {
       bg: {
-        _light: { value: '{colors.blue.500}' },
-        _dark: { value: '{colors.blue.500}' },
+        _light: { value: '#0C90B8' },
+        _dark: { value: '#0C90B8' },
       },
     },
   },
   icon: {
     primary: {
-      _light: { value: '{colors.gray.500}' },
-      _dark: { value: '{colors.gray.400}' },
+      _light: { value: '#6e7985' },
+      _dark: { value: '#6e7985' },
     },
     secondary: {
-      _light: { value: '{colors.gray.400}' },
-      _dark: { value: '{colors.gray.500}' },
+      _light: { value: '#828b96' },
+      _dark: { value: '#828b96' },
     },
   },
   button: {
     primary: {
-      _light: { value: '{colors.blue.600}' },
-      _dark: { value: '{colors.blue.600}' },
+      _light: { value: '#0C90B8' },
+      _dark: { value: '#0C90B8' },
       text: {
-        _light: { value: '{colors.white}' },
-        _dark: { value: '{colors.white}' },
+        _light: { value: '#f7faff' },
+        _dark: { value: '#f7faff' },
       },
     },
   },
   link: {
     primary: {
-      _light: { value: '{colors.blue.600}' },
-      _dark: { value: '{colors.blue.300}' },
+      _light: { value: '#0C90B8' },
+      _dark: { value: '#0C90B8' },
     },
   },
   graph: {
     line: {
-      _light: { value: '{colors.blue.500}' },
-      _dark: { value: '{colors.blue.200}' },
+      _light: { value: '#0C90B8' },
+      _dark: { value: '#0C90B8' },
     },
     gradient: {
       start: {
-        _light: { value: 'rgba(144, 205, 244, 0.3)' }, // blue.200 with opacity 0.3
-        _dark: { value: 'rgba(144, 205, 244, 0.3)' }, // blue.200 with opacity 0.3
+        _light: { value: 'rgba(12, 144, 184, 0.3)' },
+        _dark: { value: 'rgba(12, 144, 184, 0.3)' },
       },
       stop: {
-        _light: { value: 'rgba(144, 205, 244, 0)' }, // blue.200 with opacity 0
-        _dark: { value: 'rgba(144, 205, 244, 0)' }, // blue.200 with opacity 0
+        _light: { value: 'rgba(12, 144, 184, 0)' },
+        _dark: { value: 'rgba(12, 144, 184, 0)' },
       },
     },
   },
   navigation: {
     bg: {
       selected: {
-        _light: { value: '{colors.blue.50}' },
-        _dark: { value: '{colors.gray.800}' },
+        _light: { value: '#e5f3f8' },
+        _dark: { value: '#e5f3f8' },
       },
     },
     text: {
       selected: {
-        _light: { value: '{colors.blue.700}' },
-        _dark: { value: '{colors.gray.50}' },
+        _light: { value: '#085d78' },
+        _dark: { value: '#085d78' },
       },
     },
   },
   stats: {
     bg: {
-      _light: { value: '{colors.gray.50}' },
-      _dark: { value: '{colors.whiteAlpha.100}' },
+      _light: { value: '#f4f8fc' },
+      _dark: { value: '#f4f8fc' },
     },
   },
   topbar: {
     bg: {
-      _light: { value: '{colors.gray.50}' },
-      _dark: { value: '{colors.whiteAlpha.100}' },
+      _light: { value: '#f4f8fc' },
+      _dark: { value: '#f4f8fc' },
     },
   },
   tabs: {
     text: {
       primary: {
-        _light: { value: '{colors.blue.700}' },
-        _dark: { value: '{colors.blue.100}' },
+        _light: { value: '#0a7495' },
+        _dark: { value: '#0a7495' },
       },
     },
   },
@@ -286,6 +289,25 @@ const colors = {
   reddit: { value: '#FF4500' },
   celo: { value: '#FCFF52' },
   clusters: { value: '#DE6061' },
+
+  // G8CHAIN BRAND + STATUS COLORS (design system §1)
+  g8primary: { value: '#0C90B8' },
+  g8primaryHover: { value: '#0a7495' },
+  g8primaryDeep: { value: '#085d78' },
+  g8highlight: { value: '#38B3D4' },
+  g8kicker: { value: '#4fc3e0' },
+  g8tint: { value: '#e5f3f8' },
+  g8tintLight: { value: '#edf6fa' },
+  g8tintWash: { value: '#ebf7fa' },
+  g8panel: { value: '#f4f8fc' },
+  g8hairline: { value: '#e1e6ea' },
+  g8hairlineStrong: { value: '#d1dce8' },
+  g8ink: { value: '#171a1e' },
+  g8page: { value: '#fbfcfa' },
+  g8success: { value: '#22c55e' },
+  g8successDeep: { value: '#298e69' },
+  g8pending: { value: '#f59e0b' },
+  g8error: { value: '#DC143C' },
 
   // THEME COLORS
   theme: defaultsDeep(config.shell.topBar.colorTheme.overrides, DEFAULT_THEME_COLORS),

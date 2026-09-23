@@ -20,7 +20,7 @@ export const recipe = defineSlotRecipe({
       width: '100%',
       position: 'relative',
       isolation: 'isolate',
-      '--tabs-indicator-shadow': 'shadows.xs',
+      '--tabs-indicator-shadow': 'shadows.none',
       '--tabs-indicator-bg': 'colors.bg',
       minH: 'var(--tabs-height)',
       _horizontal: {
@@ -133,7 +133,7 @@ export const recipe = defineSlotRecipe({
         trigger: {
           fontWeight: '600',
           gap: '1',
-          borderRadius: 'base',
+          borderRadius: 'none',
           color: 'tabs.solid.fg',
           bg: 'transparent',
           _selected: {
@@ -165,7 +165,7 @@ export const recipe = defineSlotRecipe({
           borderWidth: '2px',
           borderStyle: 'solid',
           borderColor: 'tabs.secondary.border',
-          borderRadius: 'base',
+          borderRadius: 'none',
           _selected: {
             bg: 'selected.control.bg',
             color: 'selected.control.text',

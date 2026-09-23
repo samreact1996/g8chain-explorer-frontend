@@ -52,11 +52,11 @@ class MyDocument extends Document {
           { !(config.misc.fonts.heading?.url && config.misc.fonts.body?.url) &&
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/> }
           <link
-            href={ config.misc.fonts.heading?.url ?? 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap' }
+            href={ config.misc.fonts.heading?.url ?? 'https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&display=swap' }
             rel="stylesheet"
           />
           <link
-            href={ config.misc.fonts.body?.url ?? 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' }
+            href={ config.misc.fonts.body?.url ?? 'https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap' }
             rel="stylesheet"
           />
 

@@ -18,6 +18,11 @@ const COLOR_MODE_SCRIPT_HASHES = [
   '\'sha256-Os32ny+s3zEaX+XxoAVngBThnQv/IOycQlrqgxXOgRI=\'',
   // defaultTheme: light
   '\'sha256-/ZmmXHg9XaKeWp0VJihBDn4cJ7lLM1jUtpgqdgVFvmA=\'',
+  // G8Chain: forcedTheme 'light' (theme pinned by DESIGN_SYSTEM_G8CHAIN.md), per defaultTheme prop:
+  // undefined / 'dark' / 'light'
+  '\'sha256-8qDDpyos/rN+IKWOtlkAFKuT9Lu9xSKSAjPb0LkojVU=\'',
+  '\'sha256-H8dtdJssPbKw0ZgvWxVtj2alka/Wr6RCQSKIwPslX3I=\'',
+  '\'sha256-i6Mmli34p9f5NwcxJVLrTIMmehKgS7H2tR/sHfQQk4c=\'',
 ];
 
 const externalFontsDomains = (() => {

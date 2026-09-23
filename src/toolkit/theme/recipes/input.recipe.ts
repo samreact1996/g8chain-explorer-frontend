@@ -20,7 +20,7 @@ export const recipe = defineRecipe({
 
     textOverflow: 'ellipsis',
     textAlign: 'start',
-    borderRadius: 'base',
+    borderRadius: 'none',
     height: 'var(--input-height)',
     minW: 'var(--input-height)',
     color: 'input.fg',
@@ -80,7 +80,6 @@ export const recipe = defineRecipe({
         },
         _focus: {
           borderColor: 'input.border.focus',
-          boxShadow: 'size.md',
           _hover: {
             borderColor: 'input.border.focus',
           },

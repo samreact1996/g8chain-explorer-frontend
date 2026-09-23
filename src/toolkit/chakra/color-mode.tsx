@@ -17,7 +17,10 @@ export function ColorModeProvider(props: ColorModeProviderProps) {
     <ThemeProvider
       attribute="class"
       scriptProps={{ 'data-cfasync': 'false' }}
-      defaultTheme={ config.shell.topBar.colorTheme.default?.colorMode }
+      defaultTheme={ config.shell.topBar.colorTheme.default?.colorMode ?? 'light' }
+      // G8Chain design system rule 1: light theme is pinned. forcedTheme (not just defaultTheme)
+      // overrides any previously stored user preference, so the `dark` class never applies.
+      forcedTheme="light"
       disableTransitionOnChange
       { ...props }
     />

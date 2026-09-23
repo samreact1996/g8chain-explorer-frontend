@@ -21,7 +21,7 @@ export const recipe = defineSlotRecipe({
       md: {
         input: {
           boxSize: 10,
-          borderRadius: 'base',
+          borderRadius: 'none',
         },
       },
     },

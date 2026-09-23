@@ -10,7 +10,6 @@ import { PopoverBody, PopoverContent, PopoverRoot, PopoverTrigger } from 'src/to
 import { Tooltip } from 'src/toolkit/chakra/tooltip';
 import { useDisclosure } from 'src/toolkit/hooks/useDisclosure';
 
-import SettingsColorTheme from './color-theme/SettingsColorTheme';
 import SettingsIdentIcon from './ident-icon/SettingsIdentIcon';
 import SettingsAddressFormat from './SettingsAddressFormat';
 import SettingsPoorReputationTokens from './SettingsPoorReputationTokens';
@@ -66,7 +65,7 @@ const Settings = () => {
       </Tooltip>
       <PopoverContent overflowY="hidden" w="auto" fontSize="sm">
         <PopoverBody>
-          <SettingsColorTheme onSelect={ popover.onClose }/>
+          { /* G8Chain design system rule 1: light theme is pinned — no theme switcher */ }
           <SettingsIdentIcon/>
           <SettingsAddressFormat/>
           <Separator my={ 3 }/>

@@ -11,7 +11,7 @@ export const recipe = defineRecipe({
     position: 'relative',
     appearance: 'none',
     textAlign: 'start',
-    borderRadius: 'base',
+    borderRadius: 'none',
     color: 'input.fg',
     '--focus-color': 'colors.border.error',
     '--error-color': 'colors.border.error',
@@ -42,7 +42,6 @@ export const recipe = defineRecipe({
         },
         _focus: {
           borderColor: 'input.border.focus',
-          boxShadow: 'size.md',
           _hover: {
             borderColor: 'input.border.focus',
           },

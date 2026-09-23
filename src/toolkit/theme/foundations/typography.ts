@@ -6,16 +6,29 @@ import type { ExcludeUndefined } from 'src/shared/types/utils';
 
 import config from 'src/config';
 
-export const BODY_TYPEFACE = config.misc.fonts.body?.name ?? 'Inter, InterFallback';
-export const HEADING_TYPEFACE = config.misc.fonts.heading?.name ?? 'Poppins';
+// G8Chain design system: DM Sans for body copy and headings, Space Mono for machine data
+// (addresses, hashes, numerics). The _document.tsx "body" stylesheet slot loads Space Mono.
+export const BODY_TYPEFACE = config.misc.fonts.body?.name ?? 'DM Sans';
+export const HEADING_TYPEFACE = config.misc.fonts.heading?.name ?? 'DM Sans';
+export const MONO_TYPEFACE = 'Space Mono';
 
 export const fonts: ExcludeUndefined<ThemingConfig['tokens']>['fonts'] = {
   heading: { value: `${ HEADING_TYPEFACE }, sans-serif` },
   body: { value: `${ BODY_TYPEFACE }, sans-serif` },
+  mono: { value: `${ MONO_TYPEFACE }, monospace` },
 };
 
 export const textStyles: ThemingConfig['textStyles'] = {
   heading: {
+    display: {
+      value: {
+        fontSize: 'clamp(2.4rem, 5vw, 4.2rem)',
+        lineHeight: '1.06',
+        fontWeight: '300',
+        letterSpacing: '-0.04em',
+        fontFamily: 'heading',
+      },
+    },
     xl: {
       value: {
         fontSize: '32px',
@@ -89,6 +102,42 @@ export const textStyles: ThemingConfig['textStyles'] = {
         lineHeight: '16px',
         fontWeight: '400',
         fontFamily: 'body',
+      },
+    },
+  },
+  kicker: {
+    value: {
+      fontSize: '12px',
+      lineHeight: '16px',
+      fontWeight: '700',
+      letterSpacing: '0.1em',
+      textTransform: 'uppercase',
+      fontFamily: 'mono',
+    },
+  },
+  mono: {
+    lg: {
+      value: {
+        fontSize: '13px',
+        lineHeight: '20px',
+        fontWeight: '400',
+        fontFamily: 'mono',
+      },
+    },
+    sm: {
+      value: {
+        fontSize: '12px',
+        lineHeight: '18px',
+        fontWeight: '400',
+        fontFamily: 'mono',
+      },
+    },
+    xs: {
+      value: {
+        fontSize: '11px',
+        lineHeight: '16px',
+        fontWeight: '400',
+        fontFamily: 'mono',
       },
     },
   },

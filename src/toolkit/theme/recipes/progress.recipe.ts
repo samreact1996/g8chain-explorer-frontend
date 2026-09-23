@@ -13,7 +13,7 @@ export const recipe = defineSlotRecipe({
     track: {
       overflow: 'hidden',
       position: 'relative',
-      borderRadius: 'base',
+      borderRadius: 'none',
     },
     range: {
       display: 'flex',
@@ -61,7 +61,7 @@ export const recipe = defineSlotRecipe({
     shape: {
       rounded: {
         track: {
-          borderRadius: 'base',
+          borderRadius: 'none',
         },
       },
     },

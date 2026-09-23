@@ -15,7 +15,7 @@ export const recipe = defineRecipe({
     },
     state: {
       loading: {
-        borderRadius: 'base',
+        borderRadius: 'none',
         boxShadow: 'none',
         backgroundClip: 'padding-box',
         cursor: 'default',
