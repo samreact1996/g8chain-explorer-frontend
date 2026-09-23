@@ -23,7 +23,8 @@ interface SevioConfig {
 }
 
 const provider: AdBannerProviders = (() => {
-  const envValue = (getEnvValue('NEXT_PUBLIC_AD_BANNER_PROVIDER') ?? 'slise') as AdBannerProviders;
+  // G8Chain: ads are disabled by default; the provider env can still turn them back on
+  const envValue = (getEnvValue('NEXT_PUBLIC_AD_BANNER_PROVIDER') ?? 'none') as AdBannerProviders;
   const consentKey = envValue !== 'none' ? envValue : undefined;
 
   if (consentKey && usercentrics && !usercentrics.consent?.[consentKey]) {

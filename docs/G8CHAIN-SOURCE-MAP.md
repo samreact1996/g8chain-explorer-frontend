@@ -178,7 +178,7 @@ Composition: `src/toolkit/theme/theme.ts` (`createSystem(defaultConfig, customCo
 
 1. **Dark mode renders by system preference** (no pinned default) — violates design-system rule 1; pin light in Phase 2.
 2. **Hero carries a purple/blue gradient** (Blockscout default) and a **"Network logo placeholder"** — replaced in Phases 3–4 by the dark navy G8Chain band + typeset wordmark.
-3. **Ad slots are active**: hero sidebar ad (homepage), "Sponsored" text bar + inline banner on tx/address detail pages (Blockscout ad feature, FUN88/bc.game creative). They clash with the premium positioning — flag for a client decision before Phase 5; leave functional until then.
+3. **Ad slots disabled (2026-09-23)**: default providers in `src/features/ads/banner/config.ts` and `src/features/ads/text/config.ts` flipped from `slise`/`sevio` to `'none'` (env `NEXT_PUBLIC_AD_BANNER_PROVIDER`/`NEXT_PUBLIC_AD_TEXT_PROVIDER` can still re-enable). Verified in-browser: no Sponsored rows/banners on home, tx, address pages.
 4. Gas tracker widget renders honestly as `$N/A` (no pricing data) — keep honest empty states.
 5. Empty-token API responses and empty blocks are legitimate states (many zero-txn blocks at current usage); preserve "no data" vs "loading failed" distinction (`DataList` already does).
 6. `.g8chain/agent/README.md` references `ENV.local.example`, which does not exist in the handoff; env essentials are inline in `PROJECT_CONTEXT.md` instead.

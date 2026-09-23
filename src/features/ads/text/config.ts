@@ -22,7 +22,8 @@ interface SevioConfig {
 
 const provider: AdTextProviders = (() => {
   const envValue = getEnvValue('NEXT_PUBLIC_AD_TEXT_PROVIDER') as AdTextProviders;
-  return envValue && SUPPORTED_AD_TEXT_PROVIDERS.includes(envValue) ? envValue : 'sevio';
+  // G8Chain: ads are disabled by default; the provider env can still turn them back on
+  return envValue && SUPPORTED_AD_TEXT_PROVIDERS.includes(envValue) ? envValue : 'none';
 })();
 
 const title = 'Text ads';
