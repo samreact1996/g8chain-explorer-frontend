@@ -20,7 +20,6 @@ import NetworkAddToWallet from 'src/features/web3-wallet/components/NetworkAddTo
 
 import config from 'src/config';
 import CopyToClipboard from 'src/shared/texts/CopyToClipboard';
-import SpriteIcon from 'src/sprite/SpriteIcon';
 
 import { Link } from 'src/toolkit/chakra/link';
 import { Skeleton } from 'src/toolkit/chakra/skeleton';
@@ -136,46 +135,60 @@ const Footer = () => {
   }, []);
 
   const renderProjectInfo = React.useCallback((gridArea?: GridProps['gridArea']) => {
-    const logoColor = { base: 'blue.600', _dark: 'white' };
-
+    // G8Chain legal line per design system §8; the Blockscout product/engine credit is the
+    // licence-mandated interface attribution (LicenseRef-Blockscout) and must stay.
     return (
       <Box gridArea={ gridArea }>
-        <Flex columnGap={ 2 } textStyle="xs" alignItems="center">
-          <span>Made with</span>
-          <Link href="https://www.blockscout.com" external noIcon display="inline-flex" color={ logoColor } _hover={{ color: logoColor }}>
-            <SpriteIcon
-              name="networks/logo-placeholder"
-              width="80px"
-              height={ 4 }
-            />
-          </Link>
+        <Flex alignItems="center" columnGap={ 2 } mb={ 4 }>
+          <Box
+            display="inline-flex"
+            alignItems="center"
+            justifyContent="center"
+            w="24px"
+            h="24px"
+            bg="g8primary"
+            color="white"
+            fontWeight={ 700 }
+            fontSize="13px"
+            fontFamily="heading"
+            lineHeight={ 1 }
+            aria-hidden
+          >
+            G8
+          </Box>
+          <Text fontFamily="heading" fontWeight={ 700 } fontSize="16px" letterSpacing="-0.02em" color="text.primary" lineHeight={ 1 }>G8CHAIN</Text>
         </Flex>
-        <Text mt={ 3 } fontSize="xs">
-          Scan, inspect, and analyze EVM based blockchains with Blockscout, a blockchain explorer for Ethereum networks.
-        </Text>
-        <VStack mt={ 6 } alignItems="start" textStyle="xs" gap={ 1 }>
-          <Flex flexDir={ onionDomain ? 'row' : 'column' } _empty={{ display: 'none' }} columnGap={ 6 } rowGap={ 1 }>
-            { apiVersionUrl && (
-              <Text>
-                Backend: <Link href={ apiVersionUrl } external noIcon>{ backendVersionData?.backend_version }</Link>
-              </Text>
-            ) }
-            { frontendLink && (
-              <Text>
-                Frontend: { frontendLink }
-              </Text>
-            ) }
-          </Flex>
-          { onionDomain && (
-            <HStack _empty={{ display: 'none' }} columnGap={ 0 }>
-              <Text aria-label={ `Also accessible via Tor Browser: ${ onionDomain }` }>Also accessible via Tor Browser</Text>
-              <CopyToClipboard text={ onionDomain } tooltipContent="Copy .onion address to clipboard" ml={ 1 }/>
-            </HStack>
+        <Flex mt={ 4 } columnGap={ 2 } rowGap={ 1 } flexWrap="wrap" _empty={{ display: 'none' }}>
+          { apiVersionUrl && (
+            <Text textStyle="xs" color="text.secondary">
+              Backend: <Link href={ apiVersionUrl } external noIcon>{ backendVersionData?.backend_version }</Link>
+            </Text>
           ) }
-          <Text>
-            Copyright { copy } Blockscout Limited 2023-{ (new Date()).getFullYear() }
-          </Text>
-        </VStack>
+          { frontendLink && (
+            <Text textStyle="xs" color="text.secondary">
+              Frontend: { frontendLink }
+            </Text>
+          ) }
+        </Flex>
+        { onionDomain && (
+          <HStack _empty={{ display: 'none' }} columnGap={ 0 } mt={ 2 }>
+            <Text
+              aria-label={ `Also accessible via Tor Browser: ${ onionDomain }` }
+              textStyle="xs"
+              color="text.secondary"
+            >
+              Also accessible via Tor Browser
+            </Text>
+            <CopyToClipboard text={ onionDomain } tooltipContent="Copy .onion address to clipboard" ml={ 1 }/>
+          </HStack>
+        ) }
+        <Text mt={ 4 } textStyle="xs" color="text.secondary">
+          { copy } 2026 G8CHAIN — G8CHAIN S.R.L. · Design &amp; Concept ALPHAG8.com
+        </Text>
+        <Text mt={ 2 } textStyle="xs" color="text.secondary">
+          Powered by <Link href="https://blockscout.com" external noIcon color="link.primary">Blockscout</Link>
+          { ' — Scan, inspect, and analyze EVM based blockchains with Blockscout, a blockchain explorer for Ethereum networks.' }
+        </Text>
       </Box>
     );
   }, [ apiVersionUrl, backendVersionData?.backend_version, frontendLink, onionDomain ]);
@@ -185,6 +198,14 @@ const Footer = () => {
     borderTopWidth: '1px',
     borderTopColor: 'border.divider',
   };
+
+  // G8Chain colorstrip: brand gradient bar closing the page (design system §10.6)
+  const colorstrip = (
+    <Box
+      h="3px"
+      bg="linear-gradient(90deg, #085d78 0%, #0a7495 25%, #0C90B8 55%, #38b3d4 100%)"
+    />
+  );
 
   const contentProps: GridProps = {
     px: { base: 4, lg: config.shell.navigation.layout === 'horizontal' ? 6 : 12, '2xl': 6 },
@@ -222,6 +243,7 @@ const Footer = () => {
   if (config.shell.footer.links) {
     return (
       <Box { ...containerProps }>
+        { colorstrip }
         <Grid { ...contentProps }>
           <div>
             { renderNetworkInfo() }
@@ -263,6 +285,7 @@ const Footer = () => {
 
   return (
     <Box { ...containerProps }>
+      { colorstrip }
       <Grid
         { ...contentProps }
         gridTemplateAreas={{

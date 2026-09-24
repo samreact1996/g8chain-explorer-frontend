@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
-import NavigationDesktop from 'src/shell/navigation/horizontal/NavigationDesktop';
-
-import config from 'src/config';
+// G8Chain: the primary navigation moved into the sticky TopBar (logo + links + actions
+// in one bar). No separate nav row is rendered in any layout.
 
 const EmptyComponent = () => null;
 
-export default config.shell.navigation.layout === 'horizontal' ? NavigationDesktop : EmptyComponent;
+export default EmptyComponent;

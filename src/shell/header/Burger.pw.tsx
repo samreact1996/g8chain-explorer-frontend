@@ -39,7 +39,7 @@ test('submenu', async({ render, page }) => {
   const component = await render(<Burger/>, { hooksConfig });
 
   await component.getByRole('button', { name: 'Menu button' }).click();
-  await page.locator('div[aria-label="Blockchain link group"]').click();
+  await page.locator('div[aria-label="Tokens link group"]').click();
   await expect(page).toHaveScreenshot();
 });
 

@@ -16,7 +16,13 @@ import SettingsPoorReputationTokens from './SettingsPoorReputationTokens';
 import SettingsScamTokens from './SettingsScamTokens';
 import SettingsLocalTime from './time-format/SettingsLocalTime';
 
-const Settings = () => {
+interface Props {
+
+  /** override the gear color (used by the G8Chain header over the dark hero) */
+  color?: string;
+}
+
+const Settings = ({ color }: Props) => {
   const popover = useDisclosure();
   const tooltip = useDisclosure();
 
@@ -57,6 +63,7 @@ const Settings = () => {
               size="2xs"
               borderRadius="sm"
               aria-label="User settings"
+              color={ color }
             >
               <SpriteIcon name="gear"/>
             </IconButton>

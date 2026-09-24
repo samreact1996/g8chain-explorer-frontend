@@ -4,50 +4,56 @@ import { chakra } from '@chakra-ui/react';
 import { route } from 'nextjs-routes';
 import React from 'react';
 
-import config from 'src/config';
-import SpriteIcon from 'src/sprite/SpriteIcon';
-
-import { useColorModeValue } from 'src/toolkit/chakra/color-mode';
-import { Image } from 'src/toolkit/chakra/image';
-
-import { INVERT_FILTER } from './consts';
-
-const LogoFallback = () => {
-  return (
-    <SpriteIcon
-      name="networks/logo-placeholder"
-      width="120px"
-      height="24px"
-      color={{ base: 'blue.600', _dark: 'white' }}
-      aria-label="Network logo placeholder"
-    />
-  );
-};
-
+// G8Chain branding: typeset wordmark (DM Sans, tight tracking, design system §8).
+// No image asset — the mark is the text itself, colored with the brand family.
+// `forceLight` renders the light variant for use over the dark hero band.
 type Props = {
   className?: string;
+  forceLight?: boolean;
 };
 
-const NetworkLogo = ({ className }: Props) => {
-
-  const logoSrc = useColorModeValue(config.chain.logo.default, config.chain.logo.dark || config.chain.logo.default);
+const NetworkLogo = ({ className, forceLight }: Props) => {
+  const markBg = forceLight ? 'rgba(255, 255, 255, 0.12)' : 'g8primary';
+  const wordColor = forceLight ? '#f2f7fb' : 'text.primary';
 
   return (
     <chakra.a
       className={ className }
       href={ route({ pathname: '/' }) }
-      aria-label="Link to main page"
+      aria-label="G8Chain — link to main page"
+      display="inline-flex"
+      alignItems="center"
+      flexShrink={ 0 }
     >
-      <Image
+      <chakra.span
+        display="inline-flex"
+        alignItems="center"
+        justifyContent="center"
+        w="24px"
         h="24px"
-        skeletonWidth="120px"
-        src={ logoSrc }
-        alt={ `${ config.chain.name } network logo` }
-        fallback={ <LogoFallback/> }
-        filter={{ _dark: !config.chain.logo.dark ? INVERT_FILTER : undefined }}
-        objectFit="contain"
-        objectPosition="left"
-      />
+        mr={ 2 }
+        bg={ markBg }
+        color="white"
+        fontWeight={ 700 }
+        fontSize="13px"
+        fontFamily="heading"
+        lineHeight={ 1 }
+        userSelect="none"
+        aria-hidden
+      >
+        G8
+      </chakra.span>
+      <chakra.span
+        fontFamily="heading"
+        fontWeight={ 700 }
+        fontSize="17px"
+        letterSpacing="-0.02em"
+        color={ wordColor }
+        lineHeight={ 1 }
+        userSelect="none"
+      >
+        G8CHAIN
+      </chakra.span>
     </chakra.a>
   );
 };

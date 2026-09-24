@@ -4,50 +4,37 @@ import { chakra } from '@chakra-ui/react';
 import { route } from 'nextjs-routes';
 import React from 'react';
 
-import config from 'src/config';
-import SpriteIcon from 'src/sprite/SpriteIcon';
-
-import { useColorModeValue } from 'src/toolkit/chakra/color-mode';
-import { Image } from 'src/toolkit/chakra/image';
-
-import { INVERT_FILTER } from './consts';
-
-const IconFallback = () => {
-  return (
-    <SpriteIcon
-      name="networks/icon-placeholder"
-      w="30px"
-      h="30px"
-      color={{ base: 'blue.600', _dark: 'white' }}
-      aria-label="Network icon placeholder"
-    />
-  );
-};
-
+// G8Chain branding: square mark used where the full wordmark does not fit
+// (mobile header, collapsed sidebar, chain menu) — typeset, no image asset.
 type Props = {
   className?: string;
 };
 
 const NetworkIcon = ({ className }: Props) => {
-
-  const iconSrc = useColorModeValue(config.chain.icon['default'], config.chain.icon.dark || config.chain.icon['default']);
-
   return (
     <chakra.a
       className={ className }
       href={ route({ pathname: '/' }) }
-      aria-label="Link to main page"
+      aria-label="G8Chain — link to main page"
+      display="inline-flex"
+      flexShrink={ 0 }
     >
-      <Image
+      <chakra.span
+        display="inline-flex"
+        alignItems="center"
+        justifyContent="center"
         w="30px"
         h="30px"
-        src={ iconSrc }
-        alt={ `${ config.chain.name } network icon` }
-        fallback={ <IconFallback/> }
-        filter={{ _dark: !config.chain.icon.dark ? INVERT_FILTER : undefined }}
-        objectFit="contain"
-        objectPosition="left"
-      />
+        bg="g8primary"
+        color="white"
+        fontWeight={ 700 }
+        fontSize="15px"
+        fontFamily="heading"
+        lineHeight={ 1 }
+        userSelect="none"
+      >
+        G8
+      </chakra.span>
     </chakra.a>
   );
 };

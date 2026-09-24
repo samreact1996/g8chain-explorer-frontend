@@ -17,9 +17,12 @@ interface Props {
   className?: string;
   item: NavItem;
   noIcon?: boolean;
+
+  /** override link color (used by the G8Chain header over the dark hero) */
+  textColor?: string;
 }
 
-const NavLink = ({ className, item, noIcon }: Props) => {
+const NavLink = ({ className, item, noIcon, textColor }: Props) => {
   const isInternalLink = isInternalItem(item);
 
   const isActive = 'isActive' in item && item.isActive;
@@ -44,6 +47,11 @@ const NavLink = ({ className, item, noIcon }: Props) => {
         textStyle="sm"
         fontWeight={ 500 }
         borderRadius="base"
+        { ...(textColor ? {
+          color: textColor,
+          _hover: { color: 'g8highlight', textDecoration: 'none' },
+          _selected: { color: 'white', bg: 'rgba(255, 255, 255, 0.12)' },
+        } : {}) }
       >
         { !noIcon && <NavLinkIcon item={ item } mr={ 3 }/> }
         <chakra.span>{ item.text }</chakra.span>

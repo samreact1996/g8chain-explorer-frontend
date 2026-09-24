@@ -34,7 +34,7 @@ test.describe('no auth', () => {
   });
 
   test('+@dark-mode', async({ page }) => {
-    await page.locator('a[aria-label="Link to main page"]').last().hover();
+    await page.locator('a[aria-label="G8Chain — link to main page"]').last().hover();
     await expect(component).toHaveScreenshot();
   });
 
@@ -42,7 +42,7 @@ test.describe('no auth', () => {
     test.use({ viewport: pwConfig.viewport.xl });
 
     test('+@dark-mode', async({ page }) => {
-      await page.locator('a[aria-label="Link to main page"]').first().hover();
+      await page.locator('a[aria-label="G8Chain — link to main page"]').first().hover();
       await expect(component).toHaveScreenshot();
     });
   });
@@ -98,7 +98,7 @@ test.describe('with tooltips', () => {
 
     await component.locator('header').hover();
     await page.locator('svg[aria-label="Expand/Collapse menu"]').click();
-    await page.locator('a[aria-label="API link"]').hover();
+    await page.locator('a[aria-label="Blocks link"]').hover();
 
     await expect(component).toHaveScreenshot();
   });
@@ -115,7 +115,7 @@ test.describe('with submenu', () => {
       </Flex>,
       { hooksConfig },
     );
-    await page.locator('div[aria-label="Blockchain link group"]').hover();
+    await page.locator('div[aria-label="Tokens link group"]').hover();
   });
 
   test('base view', async() => {
@@ -152,16 +152,16 @@ noSideBarCookieTest.describe('cookie set to false', () => {
   });
 
   noSideBarCookieTest('', async() => {
-    const chainIcon = component.getByLabel('Network icon placeholder');
-    await expect(chainIcon).toBeHidden();
+    const wordmark = component.getByText('G8CHAIN');
+    await expect(wordmark).toBeVisible();
   });
 
   noSideBarCookieTest.describe('xl screen', () => {
     noSideBarCookieTest.use({ viewport: pwConfig.viewport.xl });
 
     noSideBarCookieTest('', async() => {
-      const chainIcon = component.getByLabel('Network icon placeholder');
-      await expect(chainIcon).toBeHidden();
+      const wordmark = component.getByText('G8CHAIN');
+      await expect(wordmark).toBeVisible();
     });
   });
 });
@@ -183,8 +183,8 @@ sideBarCookieTest.describe('cookie set to true', () => {
       { hooksConfig },
     );
 
-    const chainIcon = component.getByLabel('Network icon placeholder');
-    await expect(chainIcon).toBeVisible();
+    const wordmark = component.getByText('G8CHAIN');
+    await expect(wordmark).toBeHidden();
   });
 });
 
@@ -234,12 +234,12 @@ test.describe('with highlighted routes', () => {
   });
 
   test('+@dark-mode', async({ page }) => {
-    await page.locator('a[aria-label="Link to main page"]').last().hover();
+    await page.locator('a[aria-label="G8Chain — link to main page"]').last().hover();
     await expect(component).toHaveScreenshot();
   });
 
   test('with submenu', async({ page }) => {
-    await page.locator('div[aria-label="Blockchain link group"]').hover();
+    await page.locator('div[aria-label="Tokens link group"]').hover();
     await expect(component).toHaveScreenshot();
   });
 
@@ -247,7 +247,7 @@ test.describe('with highlighted routes', () => {
     test.use({ viewport: pwConfig.viewport.xl });
 
     test('+@dark-mode', async({ page }) => {
-      await page.locator('a[aria-label="Link to main page"]').first().hover();
+      await page.locator('a[aria-label="G8Chain — link to main page"]').first().hover();
       await expect(component).toHaveScreenshot();
     });
   });
@@ -277,7 +277,7 @@ const promoBannerTest = (type: 'text' | 'image') => {
     });
 
     test(`${ darkModeRule }`, async({ page }) => {
-      await page.locator('a[aria-label="Link to main page"]').last().hover();
+      await page.locator('a[aria-label="G8Chain — link to main page"]').last().hover();
       await expect(component).toHaveScreenshot();
     });
 
@@ -290,7 +290,7 @@ const promoBannerTest = (type: 'text' | 'image') => {
       test.use({ viewport: pwConfig.viewport.xl });
 
       test(`${ darkModeRule }`, async({ page }) => {
-        await page.locator('a[aria-label="Link to main page"]').first().hover();
+        await page.locator('a[aria-label="G8Chain — link to main page"]').first().hover();
         await expect(component).toHaveScreenshot();
       });
     });

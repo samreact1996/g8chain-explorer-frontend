@@ -16,9 +16,12 @@ import { checkRouteHighlight } from '../utils';
 import NavLink from './NavLink';
 interface Props {
   item: NavGroupItem;
+
+  /** override link color (used by the G8Chain header over the dark hero) */
+  textColor?: string;
 }
 
-const NavLinkGroup = ({ item }: Props) => {
+const NavLinkGroup = ({ item, textColor }: Props) => {
   const { open, onOpenChange } = useDisclosure();
 
   const isHighlighted = checkRouteHighlight(item.subItems);
@@ -74,6 +77,11 @@ const NavLinkGroup = ({ item }: Props) => {
         { ...(item.isActive ? { 'data-selected': true } : {}) }
         { ...(open ? { 'data-active': true } : {}) }
         borderRadius="base"
+        { ...(textColor ? {
+          color: textColor,
+          _hover: { color: 'g8highlight', textDecoration: 'none' },
+          _selected: { color: 'white', bg: 'rgba(255, 255, 255, 0.12)' },
+        } : {}) }
       >
         { item.text }
         { isHighlighted && (

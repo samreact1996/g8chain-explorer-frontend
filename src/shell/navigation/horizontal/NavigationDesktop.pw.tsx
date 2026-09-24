@@ -37,8 +37,8 @@ testWithAuth('base view +@dark-mode', async({ render, mockApiResponse, mockEnvs,
   ]);
 
   const component = await render(<NavigationDesktop/>, { hooksConfig });
-  await component.getByText('Blockchain').hover();
-  await expect(page.getByText('Blocks')).toBeVisible();
+  await component.getByText('Tokens', { exact: true }).hover();
+  await expect(page.getByText('Token transfers')).toBeVisible();
   await expect(page).toHaveScreenshot({ clip: { x: 0, y: 0, width: 1500, height: 450 } });
 });
 
@@ -60,8 +60,8 @@ test('with groped items', async({ render, mockEnvs, page }) => {
   ]);
 
   const component = await render(<NavigationDesktop/>, { hooksConfig });
-  await component.getByText('Blockchain').hover();
-  await expect(page.getByText('Blocks')).toBeVisible();
+  await component.getByText('Tokens', { exact: true }).hover();
+  await expect(page.getByText('Token transfers')).toBeVisible();
   await expect(page).toHaveScreenshot({ clip: { x: 0, y: 0, width: 1500, height: 450 } });
 });
 
