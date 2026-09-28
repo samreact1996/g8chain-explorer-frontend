@@ -20,14 +20,56 @@ interface Props {
 
   /** override link color (used by the G8Chain header over the dark hero) */
   textColor?: string;
+
+  /** override hover color (dropdown sub-options hover brand blue on their glass panel) */
+  hoverColor?: string;
+
+  /** header is transparent over the homepage hero: active state is text-only, no chip */
+  isOverHero?: boolean;
 }
 
-const NavLink = ({ className, item, noIcon, textColor }: Props) => {
+const NavLink = ({ className, item, noIcon, textColor, hoverColor, isOverHero }: Props) => {
   const isInternalLink = isInternalItem(item);
 
   const isActive = 'isActive' in item && item.isActive;
 
   const isHighlighted = checkRouteHighlight(item);
+
+  // G8Chain header: Space Mono 12px uppercase with wide tracking (design system §2.3).
+  // Active state = brand color text (dark navy when scrolled), no background chip.
+  const monoStyle = {
+    fontFamily: 'mono',
+    fontSize: '12px',
+    fontWeight: 700,
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase' as const,
+  };
+
+  if (isOverHero) {
+    return (
+      <chakra.li listStyleType="none">
+        <Link
+          className={ className }
+          href={ isInternalLink ? route(item.nextRoute) : item.url }
+          external={ !isInternalLink }
+          display="flex"
+          alignItems="center"
+          variant="plain"
+          { ...(isActive ? { 'data-selected': true } : {}) }
+          w="auto"
+          px={ 3 }
+          py="9px"
+          { ...monoStyle }
+          color={ isActive ? 'white' : 'rgba(242, 247, 251, 0.75)' }
+          _hover={{ color: hoverColor ?? 'g8highlight', textDecoration: 'none' }}
+          _selected={{ color: 'white' }}
+        >
+          { !noIcon && <NavLinkIcon item={ item } mr={ 3 }/> }
+          <chakra.span>{ item.text }</chakra.span>
+        </Link>
+      </chakra.li>
+    );
+  }
 
   return (
     <chakra.li
@@ -48,9 +90,14 @@ const NavLink = ({ className, item, noIcon, textColor }: Props) => {
         fontWeight={ 500 }
         borderRadius="base"
         { ...(textColor ? {
-          color: textColor,
-          _hover: { color: 'g8highlight', textDecoration: 'none' },
-          _selected: { color: 'white', bg: 'rgba(255, 255, 255, 0.12)' },
+          ...monoStyle,
+          color: isActive ? 'g8primaryDeep' : 'text.primary',
+          _hover: { color: hoverColor ?? 'g8primary', textDecoration: 'none' },
+          _selected: { color: 'g8primaryDeep', bg: 'transparent' },
+        } : {}) }
+        { ...(hoverColor && !textColor ? {
+          ...monoStyle,
+          _hover: { color: hoverColor, textDecoration: 'none' },
         } : {}) }
       >
         { !noIcon && <NavLinkIcon item={ item } mr={ 3 }/> }

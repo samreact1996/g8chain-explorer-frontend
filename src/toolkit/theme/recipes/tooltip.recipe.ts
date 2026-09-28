@@ -12,7 +12,7 @@ export const recipe = defineSlotRecipe({
       fontWeight: '500',
       textStyle: 'sm',
       textAlign: 'center',
-      border: '1px solid',
+      border: '0.2px solid',
       borderColor: 'g8hairline',
       zIndex: 'tooltip',
       maxW: { base: 'calc(100vw - 8px)', lg: '320px' },
@@ -40,9 +40,12 @@ export const recipe = defineSlotRecipe({
     variant: {
       regular: {
         content: {
-          '--tooltip-bg': 'colors.tooltip.bg',
+          // G8Chain liquid glass (design system §1.2): frosted translucent white with
+          // dark text — keeps the light hierarchy instead of a black tooltip
+          '--tooltip-bg': 'rgba(252, 253, 251, 0.72)',
           bg: 'var(--tooltip-bg)',
-          color: 'tooltip.fg',
+          backdropFilter: 'blur(16px) saturate(1.5)',
+          color: 'text.secondary',
         },
       },
       popover: {

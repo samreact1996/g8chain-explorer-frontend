@@ -13,7 +13,7 @@ const DEFAULT_THEME_COLORS = {
       // for some reason links to colors.white and colors.black variables are not working here
       // so we use hex values instead
       // but it is not the case for other colors
-      _light: { value: '#fbfcfa' },
+      _light: { value: '#ffffff' },
       _dark: { value: '#fbfcfa' },
     },
   },

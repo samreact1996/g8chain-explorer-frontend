@@ -68,7 +68,7 @@ const Icon = (props: IconProps) => {
   const styles = getIconProps(props, Boolean(shield));
 
   if (props.isLoading) {
-    return <Skeleton { ...styles } loading borderRadius="full" flexShrink={ 0 }/>;
+    return <Skeleton { ...styles } loading borderRadius="sm" flexShrink={ 0 }/>;
   }
 
   if ('src' in props || 'name' in props) {
@@ -82,6 +82,7 @@ const Icon = (props: IconProps) => {
       return (
         <EntityBase.Icon
           { ...props }
+          boxSize="12px"
           shield={ shield }
           name="brands/safe"
         />
@@ -96,6 +97,7 @@ const Icon = (props: IconProps) => {
     return (
       <EntityBase.Icon
         { ...props }
+        boxSize="12px"
         shield={ shield }
         name={ isProxy ? 'contracts/proxy' : contractIconName }
         color={ isVerified ? 'green.500' : undefined }

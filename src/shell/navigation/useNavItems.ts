@@ -50,6 +50,13 @@ export default function useNavItems(): ReturnType {
       isActive: pathname === '/txs' || pathname === '/tx/[hash]' || pathname === '/internal-txs' || pathname === '/token-transfers',
     };
 
+    const accounts: NavItem = {
+      text: 'Accounts',
+      nextRoute: { pathname: '/accounts' as const },
+      icon: 'navigation/top_accounts',
+      isActive: pathname.startsWith('/accounts'),
+    };
+
     const tokens: NavItem = {
       text: 'Tokens',
       nextRoute: { pathname: '/tokens' as const },
@@ -68,6 +75,7 @@ export default function useNavItems(): ReturnType {
       explorer,
       blocks,
       txs,
+      accounts,
       {
         text: 'Tokens',
         icon: 'navigation/tokens',

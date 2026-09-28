@@ -119,7 +119,7 @@ const SearchBarInput = (
       onBlur={ onBlur }
       onClick={ onFormClick }
       w="100%"
-      backgroundColor="bg.primary"
+      backgroundColor={ isHeroBanner ? 'transparent' : 'bg.primary' }
       borderRadius="base"
       position="relative"
       zIndex={ isSuggestOpen ? 'modal' : 'auto' }
@@ -145,15 +145,19 @@ const SearchBarInput = (
             _light: inputConfig?.border_color?._filled?.[0] ?? DEFAULT_BORDER_COLOR._light,
             _dark: inputConfig?.border_color?._filled?.[1] ?? inputConfig?.border_color?._filled?.[0] ?? DEFAULT_BORDER_COLOR._dark,
           }}
-          color={{ _light: 'black', _dark: 'white' }}
+          // over the dark hero the typed text must be white (light glass background)
+          color={ isHeroBanner ? 'white' : { _light: 'black', _dark: 'white' } }
           backgroundColor={
             isHeroBanner ?
               ({
-                _light: inputConfig?.background?.[0] ?? 'input.bg',
-                _dark: inputConfig?.background?.[1] ?? inputConfig?.background?.[0] ?? 'input.bg',
+                // liquid glass over the dark hero (design system §1.2): translucent
+                // white + blur, unless env config sets an explicit background
+                _light: inputConfig?.background?.[0] ?? 'rgba(252, 253, 251, 0.12)',
+                _dark: inputConfig?.background?.[1] ?? inputConfig?.background?.[0] ?? 'rgba(252, 253, 251, 0.12)',
               }) :
               { base: 'dialog.bg', lg: 'input.bg' }
           }
+          backdropFilter={ isHeroBanner && !inputConfig?.background ? 'blur(12px) saturate(1.5)' : undefined }
           _placeholderShown={{
             borderColor: {
               _light: inputConfig?.border_color?._empty?.[0] ?? DEFAULT_BORDER_COLOR._light,

@@ -17,7 +17,7 @@ const LayoutHome = ({ children }: Props) => {
       <Layout.Container>
         <Layout.TopRow/>
         <HeaderMobile hideSearchButton/>
-        <Layout.MainArea>
+        <Layout.MainArea isFullBleed>
           <Layout.SideBar/>
           <Layout.MainColumn isFullBleed>
             <HeaderAlert mb={ 3 }/>

@@ -73,6 +73,7 @@ const TxsTableItem = ({
             hash={ tx.hash }
             isLoading={ isLoading }
             fontWeight="bold"
+            fontFamily="mono"
             noIcon
             maxW="100%"
             truncation="constant"
@@ -134,6 +135,7 @@ const TxsTableItem = ({
           isLoading={ isLoading }
           mt="2px"
           mode="compact"
+          fontFamily="mono"
         />
       </TableCell>
       { !config.slices.tx.hiddenFields?.value && (

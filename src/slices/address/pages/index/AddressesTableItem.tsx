@@ -46,6 +46,7 @@ const AddressesTableItem = ({
             address={ item }
             isLoading={ isLoading }
             fontWeight={ 700 }
+            fontFamily="mono"
             my="2px"
           />
           { item.public_tags && item.public_tags.length ? item.public_tags.map(tag => (

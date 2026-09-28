@@ -1,90 +1,23 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
-import { Box } from '@chakra-ui/react';
-import dynamic from 'next/dynamic';
 import React from 'react';
 
-import config from 'src/config';
-import * as cookies from 'src/shared/storage/cookies';
-
-import { Image } from 'src/toolkit/chakra/image';
-
-import AddressIdenticonGithub from './AddressIdenticonGithub';
+import AddressGradientSquare from './AddressGradientSquare';
 
 interface IconProps {
   hash: string;
   size: number;
 }
 
-const Icon = dynamic(
-  async() => {
-    const type = cookies.get(cookies.NAMES.ADDRESS_IDENTICON_TYPE) || config.slices.address.identiconType;
-    switch (type) {
-      case 'github': {
-
-        return (props: IconProps) => <AddressIdenticonGithub iconSize={ props.size } seed={ props.hash }/>;
-      }
-
-      case 'blockie': {
-        const { blo } = (await import('blo'));
-
-        return (props: IconProps) => {
-          const data = blo(props.hash as `0x${ string }`, props.size);
-          return (
-            <Image
-              src={ data }
-              alt={ `Identicon for ${ props.hash }}` }
-            />
-          );
-        };
-      }
-
-      case 'jazzicon': {
-        const Jazzicon = await import('react-jazzicon');
-
-        return (props: IconProps) => {
-          return (
-            <Jazzicon.default
-              diameter={ props.size }
-              seed={ Jazzicon.jsNumberForAddress(props.hash) }
-            />
-          );
-        };
-      }
-
-      case 'gradient_avatar': {
-        const GradientAvatar = (await import('gradient-avatar')).default;
-
-        return (props: IconProps) => {
-          const svg = GradientAvatar(props.hash, props.size, 'circle');
-          return <Box display="flex" dangerouslySetInnerHTML={{ __html: svg }}/>;
-        };
-      }
-
-      case 'nouns': {
-        const NounsIdenticon = (await import('./AddressIdenticonNouns')).default;
-
-        return (props: IconProps) => {
-          return <NounsIdenticon hash={ props.hash } size={ props.size }/>;
-        };
-      }
-
-      default: {
-        return () => null;
-      }
-    }
-  }, {
-    ssr: false,
-  });
-
 type Props = IconProps;
 
-const AddressIdenticon = ({ size, hash }: Props) => {
-  return (
-    <Box boxSize={ `${ size }px` } borderRadius="full" overflow="hidden">
-      <Icon size={ size } hash={ hash }/>
-    </Box>
-  );
+// G8Chain: a deterministic per-address gradient square replaces the classic circular
+// identicons (blockie/jazzicon/gradient avatar/...) across the whole explorer — the
+// same motif as the homepage transaction rows. The identicon-type cookie/config is
+// superseded by this design decision. The square is always 12×12 — callers that used
+// to size identicons differently (20/24/30) render the same compact accent everywhere.
+const AddressIdenticon = (props: Props) => {
+  return <AddressGradientSquare hash={ props.hash } size={ 12 }/>;
 };
 
 export default React.memo(AddressIdenticon);

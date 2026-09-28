@@ -44,10 +44,10 @@ const NetworkLogo = ({ className, forceLight }: Props) => {
         G8
       </chakra.span>
       <chakra.span
-        fontFamily="heading"
+        fontFamily="mono"
         fontWeight={ 700 }
-        fontSize="17px"
-        letterSpacing="-0.02em"
+        fontSize="16px"
+        letterSpacing="0.02em"
         color={ wordColor }
         lineHeight={ 1 }
         userSelect="none"

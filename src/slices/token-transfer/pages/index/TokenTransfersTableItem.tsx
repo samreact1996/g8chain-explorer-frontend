@@ -67,6 +67,7 @@ const TokenTransferTableItem = ({ item, isLoading, chainData }: Props) => {
             hash={ item.transaction_hash }
             isLoading={ isLoading }
             fontWeight={ 600 }
+            fontFamily="mono"
             noIcon
             truncation="constant_long"
           />
@@ -97,6 +98,7 @@ const TokenTransferTableItem = ({ item, isLoading, chainData }: Props) => {
           tokenSymbol={ item.token?.symbol ?? undefined }
           isLoading={ isLoading }
           mode={{ base: 'compact', lg: 'compact', xl: 'long' }}
+          fontFamily="mono"
         />
       </TableCell>
       <TableCell>

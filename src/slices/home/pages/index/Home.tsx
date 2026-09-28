@@ -33,17 +33,29 @@ const Home = () => {
     <HomeDataContextProvider>
       <HomeRpcDataContextProvider>
         { /* G8Chain homepage: dark hero band (title + glass search + network stats),
-            then the latest blocks/transactions below on the light background */ }
+            then the live activity console — one bordered white panel holding the
+            latest blocks and transactions side by side (design system §1.3). */ }
         <Box as="main">
           <HeroBanner>
             <HomeStats/>
           </HeroBanner>
-          <Flex mt={ 8 } direction={{ base: 'column', lg: 'row' }} columnGap={ 12 } rowGap={ 6 }>
-            { leftWidget }
-            <Box flexGrow={ 1 }>
-              <Transactions/>
+          <Box px={{ base: 3, lg: 6 }} maxW="1240px" mx="auto">
+            <Box
+              mt={ 8 }
+              mb={ 10 }
+              borderRadius="md"
+              border="1px solid"
+              borderColor="border.divider"
+              overflow="hidden"
+            >
+              <Flex direction={{ base: 'column', lg: 'row' }} alignItems="stretch">
+                { leftWidget }
+                <Box flexGrow={ 1 } minW={ 0 } display="flex" flexDir="column">
+                  <Transactions/>
+                </Box>
+              </Flex>
             </Box>
-          </Flex>
+          </Box>
         </Box>
       </HomeRpcDataContextProvider>
     </HomeDataContextProvider>

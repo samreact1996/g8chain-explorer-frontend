@@ -129,29 +129,51 @@ export const recipe = defineSlotRecipe({
     },
 
     variant: {
+      // G8Chain tab buttons (G8CHAIN website filter-button look): small mono uppercase
+      // bordered buttons — idle transparent/gray, selected light-cyan fill with brand blue
       solid: {
+        list: {
+          '--tabs-indicator-bg': 'transparent',
+          gap: 1.5,
+        },
         trigger: {
           fontWeight: '600',
           gap: '1',
+          height: 'auto',
+          minH: '28px',
+          minW: 0,
+          px: '9px',
+          py: '7px',
+          fontFamily: 'mono',
+          fontSize: '11px',
+          letterSpacing: '0.04em',
+          textTransform: 'uppercase',
           borderRadius: 'none',
-          color: 'tabs.solid.fg',
+          borderWidth: '1px',
+          borderStyle: 'solid',
+          borderColor: '#dce3e9',
+          color: '#89929d',
           bg: 'transparent',
+          transition: 'background .25s ease, border-color .25s ease, color .25s ease',
           _selected: {
-            bg: 'selected.control.bg',
-            color: 'selected.control.text',
+            bg: '#edf8fb',
+            color: '#0c90b8',
+            borderColor: '#a3cede',
             _hover: {
-              color: 'selected.control.text',
+              color: '#0c90b8',
+              borderColor: '#a3cede',
             },
           },
           _hover: {
-            color: 'hover',
+            color: '#0c90b8',
+            borderColor: '#a3cede',
           },
         },
       },
       secondary: {
         list: {
           border: 'none',
-          columnGap: '2',
+          columnGap: 1.5,
           _horizontal: {
             _before: {
               display: 'none',
@@ -159,52 +181,67 @@ export const recipe = defineSlotRecipe({
           },
         },
         trigger: {
-          fontWeight: '500',
-          color: 'tabs.secondary.fg',
+          fontWeight: '600',
+          height: 'auto',
+          minH: '28px',
+          minW: 0,
+          px: '9px',
+          py: '7px',
+          fontFamily: 'mono',
+          fontSize: '11px',
+          letterSpacing: '0.04em',
+          textTransform: 'uppercase',
+          color: '#89929d',
           bg: 'transparent',
-          borderWidth: '2px',
+          borderWidth: '1px',
           borderStyle: 'solid',
-          borderColor: 'tabs.secondary.border',
+          borderColor: '#dce3e9',
           borderRadius: 'none',
+          transition: 'background .25s ease, border-color .25s ease, color .25s ease',
           _selected: {
-            bg: 'selected.control.bg',
-            color: 'selected.control.text',
-            borderColor: 'transparent',
+            bg: '#edf8fb',
+            color: '#0c90b8',
+            borderColor: '#a3cede',
             _hover: {
-              borderColor: 'transparent',
+              borderColor: '#a3cede',
             },
           },
           _hover: {
-            color: 'hover',
-            borderColor: 'hover',
+            color: '#0c90b8',
+            borderColor: '#a3cede',
           },
         },
       },
       segmented: {
         trigger: {
-          color: 'tabs.segmented.fg',
+          fontFamily: 'mono',
+          fontSize: '11px',
+          letterSpacing: '0.04em',
+          textTransform: 'uppercase',
+          color: '#89929d',
           bg: 'transparent',
-          borderWidth: '2px',
+          borderWidth: '1px',
           borderStyle: 'solid',
-          borderColor: 'selected.control.bg',
+          borderColor: '#dce3e9',
           _hover: {
-            color: 'hover',
+            color: '#0c90b8',
+            borderColor: '#a3cede',
           },
           _selected: {
-            color: 'selected.control.text',
-            bg: 'selected.control.bg',
-            borderColor: 'selected.control.bg',
+            color: '#0c90b8',
+            bg: '#edf8fb',
+            borderColor: '#a3cede',
             _hover: {
-              color: 'selected.control.text',
+              color: '#0c90b8',
             },
             '& + *': {
-              borderLeftWidth: '0',
+              borderLeftWidth: '1px',
             },
           },
           _notLast: {
-            borderRightWidth: '0',
+            borderRightWidth: '1px',
             _selected: {
-              borderRightWidth: '2px',
+              borderRightWidth: '1px',
             },
           },
           _first: {

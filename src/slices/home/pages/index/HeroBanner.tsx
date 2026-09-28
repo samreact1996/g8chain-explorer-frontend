@@ -2,7 +2,7 @@
 
 // we use custom heading size for hero banner
 // eslint-disable-next-line no-restricted-imports
-import { Box, Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text as ChakraText } from '@chakra-ui/react';
 import React from 'react';
 
 import SearchBar from 'src/slices/search/components/search-bar/SearchBarDesktop';
@@ -30,10 +30,10 @@ const HeroBanner = ({ children }: Props) => {
       return config.slices.home.heroBanner.text;
     }
 
-    return `${ config.chain.name } explorer`;
+    return `${ config.chain.name } Explorer`;
   })();
 
-  // "G8Chain explorer" → "G8Chain" (line 1) + accent "explorer" (line 2)
+  // "G8Chain Explorer" → "G8Chain" (line 1) + accent "Explorer" (line 2)
   const parts = text.split(' ');
   const titleStart = parts.slice(0, -1).join(' ');
   const titleAccent = parts.length > 1 ? parts.at(-1) : undefined;
@@ -46,12 +46,13 @@ const HeroBanner = ({ children }: Props) => {
       transform="translateX(-50%)"
       background={ background }
       color="#f2f7fb"
-      px={{ base: 4, lg: 10 }}
       pt={{ base: '96px', lg: '128px' }}
       pb={{ base: 12, lg: 20 }}
       flexDir="column"
     >
-      <Box w="100%" maxW="1280px" mx="auto">
+      { /* padding lives on the rail box (like the navbar/footer) so the hero text
+          lines up with the page content edge below */ }
+      <Box w="100%" maxW="1240px" mx="auto" px={{ base: 3, lg: 6 }}>
         <Flex
           flexDir={{ base: 'column', lg: 'row' }}
           columnGap={ 16 }
@@ -79,7 +80,7 @@ const HeroBanner = ({ children }: Props) => {
               lineHeight={{ base: '1.04', lg: '1.02' }}
               fontWeight={ 300 }
               letterSpacing="-0.02em"
-              mb={{ base: 8, lg: 10 }}
+              mb={{ base: 4, lg: 5 }}
             >
               { titleStart }
               <br/>
@@ -87,10 +88,21 @@ const HeroBanner = ({ children }: Props) => {
                 <Box as="em" fontWeight={ 300 } fontStyle="normal" color="g8highlight">{ titleAccent }</Box>
               ) }
             </Heading>
-            <Box display={{ base: 'flex', lg: 'none' }}>
+            <ChakraText
+              maxW="560px"
+              mt={ 2 }
+              fontSize={{ base: '15px', lg: '16px' }}
+              lineHeight="1.6"
+              color="rgba(242, 247, 251, 0.72)"
+            >
+              Inspect and analyze G8Chain Distributed Ledger Infrastructure. Search
+              transactions, verify smart contracts, and explore addresses across the
+              G8Chain ecosystem.
+            </ChakraText>
+            <Box display={{ base: 'flex', lg: 'none' }} mt={ 5 }>
               <SearchBarMobile isHeroBanner/>
             </Box>
-            <Box display={{ base: 'none', lg: 'flex' }}>
+            <Box display={{ base: 'none', lg: 'flex' }} mt={ 5 }>
               <SearchBar isHeroBanner/>
             </Box>
           </Box>

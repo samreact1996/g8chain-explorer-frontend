@@ -15,7 +15,10 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
     // FIXME: I have to clone the children instead of using _icon props because of style overrides
     // in some pw tests for some reason the _icon style will be applied before the style of child (SpriteIcon component)
     const child = React.Children.only<React.ReactElement>(children as React.ReactElement);
-    const clonedChildren = size ? React.cloneElement(child, { boxSize: size === '2xs_alt' ? 3 : 5 } as React.HTMLAttributes<HTMLElement>) : child;
+    // an explicit boxSize override on the button must scale the icon too (e.g. the 12px
+    // copy buttons), otherwise the fixed-size icon overflows the shrunken button
+    const iconSize = (rest.boxSize as number | undefined) ?? (size === '2xs_alt' ? 3 : 5);
+    const clonedChildren = size ? React.cloneElement(child, { boxSize: iconSize } as React.HTMLAttributes<HTMLElement>) : child;
 
     const sizeStyle = (() => {
       switch (size) {

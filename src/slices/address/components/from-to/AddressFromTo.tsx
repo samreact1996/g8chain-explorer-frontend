@@ -26,6 +26,9 @@ interface Props {
   tokenSymbol?: string;
   truncation?: EntityProps['truncation'];
   noIcon?: boolean;
+
+  /** force the addresses into a specific font (G8Chain: monospace on explorer lists) */
+  fontFamily?: string;
 }
 
 const AddressFromTo = ({
@@ -33,7 +36,7 @@ const AddressFromTo = ({
   to,
   current,
   mode: modeProp,
-  className, isLoading, tokenHash = '', tokenSymbol = '', noIcon }: Props) => {
+  className, isLoading, tokenHash = '', tokenSymbol = '', noIcon, fontFamily }: Props) => {
   const mode = useBreakpointValue(
     {
       base: (typeof modeProp === 'object' && 'base' in modeProp ? modeProp.base : modeProp),
@@ -70,7 +73,7 @@ const AddressFromTo = ({
 
   if (mode === 'compact') {
     return (
-      <Flex className={ className } flexDir="column" rowGap={ 3 }>
+      <Flex className={ className } flexDir="column" rowGap={ 3 } fontFamily={ fontFamily }>
         <Flex alignItems="center" columnGap={ 2 }>
           <AddressFromToIcon
             isLoading={ isLoading }
@@ -89,6 +92,7 @@ const AddressFromTo = ({
             maxW="calc(100% - 28px)"
             w="min-content"
             chainId={ fromChainId }
+            fontFamily={ fontFamily }
           />
         </Flex>
         { to && (
@@ -105,6 +109,7 @@ const AddressFromTo = ({
             w="min-content"
             ml="28px"
             chainId={ toChainId }
+            fontFamily={ fontFamily }
           />
         ) }
       </Flex>
@@ -127,6 +132,7 @@ const AddressFromTo = ({
         mr={ isOutgoing ? 4 : 2 }
         chainId={ fromChainId }
         w="auto"
+        fontFamily={ fontFamily }
       />
       <AddressFromToIcon
         isLoading={ isLoading }
@@ -145,6 +151,7 @@ const AddressFromTo = ({
           ml={ 3 }
           chainId={ toChainId }
           w="auto"
+          fontFamily={ fontFamily }
         />
       ) }
     </Grid>

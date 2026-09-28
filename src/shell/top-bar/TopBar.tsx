@@ -3,20 +3,11 @@
 import { Flex, Box, HStack, chakra } from '@chakra-ui/react';
 import React from 'react';
 
-import { useAppContext } from 'src/shell/app/context';
 import NavLink from 'src/shell/navigation/horizontal/NavLink';
 import NavLinkGroup from 'src/shell/navigation/horizontal/NavLinkGroup';
 import useNavItems, { isGroupItem } from 'src/shell/navigation/useNavItems';
 
 import NetworkLogo from 'src/slices/chain/logo/NetworkLogo';
-
-import NetworkAddToWallet from 'src/features/web3-wallet/components/NetworkAddToWallet';
-import useProvider from 'src/features/web3-wallet/hooks/useProvider';
-
-import config from 'src/config';
-import * as cookies from 'src/shared/storage/cookies';
-
-import Settings from './settings/Settings';
 
 // G8Chain site header (design system §1.2): full-width, fixed to the top. Over the homepage
 // hero it is transparent; once the user scrolls, the light glass treatment
@@ -46,25 +37,6 @@ const TopBar = () => {
 
   const isOverHero = isHomeRoute && !isScrolled;
 
-  const hideAddToWalletButtonCookie = cookies.get(cookies.NAMES.HIDE_ADD_TO_WALLET_BUTTON, useAppContext().cookies);
-  const [ isAddChainButtonVisible, setIsAddChainButtonVisible ] = React.useState(hideAddToWalletButtonCookie !== 'topbar');
-
-  const web3 = useProvider();
-
-  const hasAddChainButton = Boolean(
-    isAddChainButtonVisible &&
-    web3.data?.provider &&
-    web3.data?.wallet &&
-    config.chain.rpcUrls.length &&
-    config.features.web3Wallet.isEnabled &&
-    !config.features.multichain.isEnabled,
-  );
-
-  const handleAddSuccess = React.useCallback(() => {
-    cookies.set(cookies.NAMES.HIDE_ADD_TO_WALLET_BUTTON, 'topbar', { expires: 3 * 365 });
-    setIsAddChainButtonVisible(false);
-  }, [ ]);
-
   const { mainNavItems } = useNavItems();
 
   const fg = isOverHero ? '#f2f7fb' : 'text.primary';
@@ -84,12 +56,12 @@ const TopBar = () => {
     >
       <Flex
         py={ 3 }
-        px={{ base: 4, lg: 10 }}
+        px={{ base: 3, lg: 6 }}
         m="0 auto"
         justifyContent="space-between"
         alignItems="center"
         columnGap={ 4 }
-        maxW="1280px"
+        maxW="1240px"
       >
         <HStack gap={ 0 } flex="1" minW={ 0 } alignItems="center">
           <Box display={{ base: 'none', lg: 'block' }} flexShrink={ 0 }>
@@ -104,17 +76,13 @@ const TopBar = () => {
             <Flex as="ul" columnGap={ 0 } alignItems="center" flexWrap="nowrap" css={{ '& a': { w: 'auto', px: 3 } }}>
               { mainNavItems.map((item) => {
                 if (isGroupItem(item)) {
-                  return <NavLinkGroup key={ item.text } item={ item } textColor={ typeof fg === 'string' ? fg : undefined }/>;
+                  return <NavLinkGroup key={ item.text } item={ item } textColor={ typeof fg === 'string' ? fg : undefined } isOverHero={ isOverHero }/>;
                 } else {
-                  return <NavLink key={ item.text } item={ item } noIcon py={ 1.5 } w="fit-content" textColor={ fg }/>;
+                  return <NavLink key={ item.text } item={ item } noIcon py={ 1.5 } w="fit-content" textColor={ fg } isOverHero={ isOverHero }/>;
                 }
               }) }
             </Flex>
           </chakra.nav>
-        </HStack>
-        <HStack alignItems="center" gap={ 0 } flexShrink={ 0 } color={ fg }>
-          { hasAddChainButton && <NetworkAddToWallet source="Top bar" onAddSuccess={ handleAddSuccess }/> }
-          <Settings color={ typeof fg === 'string' ? fg : undefined }/>
         </HStack>
       </Flex>
     </Box>

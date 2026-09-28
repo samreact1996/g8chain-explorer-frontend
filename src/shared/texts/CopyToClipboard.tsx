@@ -21,7 +21,7 @@ export interface Props extends Omit<IconButtonProps, 'type' | 'loading'> {
 }
 
 const CopyToClipboard = (props: Props) => {
-  const { text, type = 'text', isLoading, onClick, boxSize = 5, noTooltip, tooltipInteractive, tooltipContent: tooltipContentProp, ...rest } = props;
+  const { text, type = 'text', isLoading, onClick, boxSize = 3, noTooltip, tooltipInteractive, tooltipContent: tooltipContentProp, ...rest } = props;
 
   const { hasCopied, copy, disclosure } = useClipboard(text);
 

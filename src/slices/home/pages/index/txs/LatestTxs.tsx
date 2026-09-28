@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Text, VStack } from '@chakra-ui/react';
 import { route } from 'nextjs-routes';
 import React from 'react';
 
@@ -13,14 +13,13 @@ import { TX } from 'src/slices/tx/stubs/tx';
 
 import config from 'src/config';
 
-import { Link } from 'src/toolkit/chakra/link';
-import { TableBody, TableContainerScrollable, TableRoot } from 'src/toolkit/chakra/table';
-
 import LatestTxsDegraded from './LatestTxsDegraded';
 import LatestTxsItem, { LATEST_TXS_TABLE_MIN_WIDTH } from './LatestTxsItem';
 
 const zetachainFeature = config.features.zetachain;
 
+// G8Chain activity console — transactions feed (design system §1.3): borderless rows
+// separated by hairlines inside the console panel.
 const LatestTxs = () => {
   const txsCount = 5;
   const { data, isPlaceholderData, isError } = useApiQuery('core:homepage_txs', {
@@ -38,10 +37,10 @@ const LatestTxs = () => {
   if (data) {
     const txsUrl = route({ pathname: `/txs`, query: zetachainFeature.isEnabled ? { tab: 'evm' } : undefined });
     return (
-      <>
-        <AddressHighlightProvider>
-          <Box mb={ 3 } textStyle="sm">
-            <TableContainerScrollable>
+      <AddressHighlightProvider>
+        <Box textStyle="sm" display="flex" flexDir="column" flex={ 1 }>
+          <Box overflowX={{ base: 'auto', lg: 'unset' }} px={{ base: 3, lg: 0 }} flex={ 1 } display="flex" flexDir="column">
+            <Box minW={ LATEST_TXS_TABLE_MIN_WIDTH } flex={ 1 } display="flex" flexDir="column">
               <SocketNewItemsNotice
                 borderBottomRadius={ 0 }
                 minW={ LATEST_TXS_TABLE_MIN_WIDTH }
@@ -50,24 +49,26 @@ const LatestTxs = () => {
                 showErrorAlert={ showErrorAlert }
                 isLoading={ isPlaceholderData }
               />
-              <TableRoot minW={ LATEST_TXS_TABLE_MIN_WIDTH }>
-                <TableBody>
-                  { data.slice(0, txsCount).map(((tx, index) => (
-                    <LatestTxsItem
-                      key={ tx.hash + (isPlaceholderData ? index : '') }
-                      tx={ tx }
-                      isLoading={ isPlaceholderData }
-                    />
-                  ))) }
-                </TableBody>
-              </TableRoot>
-            </TableContainerScrollable>
+              <VStack
+                flex={ 1 }
+                gap={ 0 }
+                overflow="hidden"
+                alignItems="stretch"
+                mt={ 2 }
+                css={{ '& > * + *': { borderTopWidth: '1px', borderTopColor: 'border.divider' } }}
+              >
+                { data.slice(0, txsCount).map(((tx, index) => (
+                  <LatestTxsItem
+                    key={ tx.hash + (isPlaceholderData ? index : '') }
+                    tx={ tx }
+                    isLoading={ isPlaceholderData }
+                  />
+                ))) }
+              </VStack>
+            </Box>
           </Box>
-        </AddressHighlightProvider>
-        <Flex justifyContent="center">
-          <Link textStyle="sm" loading={ isPlaceholderData } href={ txsUrl }>View all transactions</Link>
-        </Flex>
-      </>
+        </Box>
+      </AddressHighlightProvider>
     );
   }
 

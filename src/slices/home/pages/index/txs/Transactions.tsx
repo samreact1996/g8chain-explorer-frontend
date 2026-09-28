@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: LicenseRef-Blockscout
 
+import { Box, Flex, Text } from '@chakra-ui/react';
+import { route } from 'nextjs-routes';
 import React from 'react';
 
 import { SocketProvider } from 'src/api/socket/context';
@@ -14,7 +16,7 @@ import LatestOptimisticDeposits from 'src/features/rollup/optimism/pages/home/La
 
 import config from 'src/config';
 
-import { Heading } from 'src/toolkit/chakra/heading';
+import { Link } from 'src/toolkit/chakra/link';
 import AdaptiveTabs from 'src/toolkit/components/AdaptiveTabs/AdaptiveTabs';
 
 import LatestTxs from './LatestTxs';
@@ -23,9 +25,14 @@ const rollupFeature = config.features.rollup;
 const zetachainFeature = config.features.zetachain;
 const crossChainTxsFeature = config.features.crossChainTxs;
 
+// G8Chain activity console — transactions column (design system §1.3): accent square +
+// mono uppercase header with a right-aligned "View all" link; when only one tab exists
+// (the G8Chain setup) the tab bar is skipped and the feed renders directly.
 const Transactions = () => {
 
   const isAuth = useAuth();
+
+  const txsUrl = route({ pathname: `/txs`, query: zetachainFeature.isEnabled ? { tab: 'evm' } : undefined });
 
   const tabs = [
     zetachainFeature.isEnabled && {
@@ -72,11 +79,54 @@ const Transactions = () => {
     },
   ].filter(Boolean);
 
+  const singleTab = tabs.length === 1 ? tabs[0] : undefined;
+
   return (
-    <>
-      <Heading level="3" mb={ 3 }>Latest transactions</Heading>
-      <AdaptiveTabs tabs={ tabs } unmountOnExit={ false } listProps={{ mb: 3 }}/>
-    </>
+    <Box flexGrow={ 1 } minW={ 0 }>
+      <Flex px={ 4 } pt={ 4 } pb={ 2 } alignItems="center" columnGap={ 2 }>
+        <Box w="6px" h="6px" bg="#1F4DD8" flexShrink={ 0 } aria-hidden/>
+        <Text
+          fontFamily="mono"
+          fontSize="12px"
+          fontWeight={ 700 }
+          letterSpacing="0.12em"
+          textTransform="uppercase"
+          lineHeight="20px"
+        >
+          Latest transactions
+        </Text>
+        <Link
+          ml="auto"
+          textStyle="xs"
+          color="text.secondary"
+          _hover={{ color: 'text.primary' }}
+          href={ txsUrl }
+          display="inline-flex"
+          alignItems="center"
+          columnGap={ 1 }
+        >
+          <svg
+            width="11"
+            height="11"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden
+
+          >
+            <path d="M5 12h14"/>
+            <path d="m12 5 7 7-7 7"/>
+          </svg>
+          View all
+        </Link>
+      </Flex>
+      { singleTab ? singleTab.component : (
+        <AdaptiveTabs tabs={ tabs } unmountOnExit={ false } listProps={{ px: 4, mb: 2 }}/>
+      ) }
+    </Box>
   );
 };
 

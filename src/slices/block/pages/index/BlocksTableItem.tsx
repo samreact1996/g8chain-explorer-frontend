@@ -65,6 +65,7 @@ const BlocksTableItem = ({ data, isLoading, enableTimeIncrement, animation, chai
                 hash={ data.type !== 'block' ? data.hash : undefined }
                 noIcon
                 fontWeight={ 600 }
+                fontFamily="mono"
               />
             </span>
           </Tooltip>
@@ -89,6 +90,7 @@ const BlocksTableItem = ({ data, isLoading, enableTimeIncrement, animation, chai
             address={ data.miner }
             isLoading={ isLoading }
             truncation="constant"
+            fontFamily="mono"
           />
         </TableCell>
       ) }
