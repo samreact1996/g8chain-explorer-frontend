@@ -1,0 +1,5 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm svg:build-sprite && ./deploy/scripts/make_envs_script.sh && next build",
+  "framework": "nextjs"
+}

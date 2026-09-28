@@ -99,6 +99,17 @@ const moduleExports = {
     // `typescript` as missing and aborts the build. The compiler-API path checks against
     // `lib/typescript.js`, which the alias does provide, so type-checking runs normally.
     useTypeScriptCli: false,
+    // The build peaked at ~3.5GB RSS locally; Vercel's Hobby build machine has 4GB and the
+    // default worker count (15) for page-data collection/static generation OOMs there — the
+    // deployment stalls forever on "Creating an optimized production build". Cap the workers.
+    cpus: 4,
+  },
+
+  // Type-checking during `next build` is the single largest memory consumer (the compiler-API
+  // check holds the whole program in memory and ran 2.3min locally). It is skipped here to fit
+  // Vercel's free-tier build machine; `pnpm lint:tsc` remains the enforcement point locally/CI.
+  typescript: {
+    ignoreBuildErrors: true,
   },
 
 
