@@ -259,8 +259,24 @@ Verified on /txs (Mined/Pending), /token-transfers (FILTER button shares the loo
 and an /address detail page (6 tabs, Details selected): all measure exactly the
 reference colors + Space Mono.
 
-### Not started
-- **Phase 5** — core explorer pages (txs/blocks lists & detail, address, token, contract).
+### Vercel deployment (set up 2026-09-28, committed `39fe67984`)
+Symptom: Hobby deploy stuck >20min on "Creating an optimized production build".
+Diagnosis: production build peaked at **3.47GB RSS locally** (15 page-data workers +
+compiler-API type check) vs Vercel Hobby's 4GB build machine → OOM stalls the runner with
+no error surfaced. Fix (committed): `experimental.cpus: 4` +
+`typescript.ignoreBuildErrors: true` in next.config.js (enforcement stays `pnpm lint:tsc`)
++ `vercel.json` buildCommand `pnpm svg:build-sprite && ./deploy/scripts/make_envs_script.sh
+&& next build` (skips download_assets — its env URLs are unset; script itself skips
+missing URLs gracefully). Verified: full build succeeds under a 3GB cap
+(NODE_OPTIONS=--max-old-space-size=3072, BUILD_ID written).
+**User's Vercel checklist (Hobby):** import repo, branch `g8chain-redesign`; add the
+NEXT_PUBLIC_* env vars in Project Settings → Environment Variables (copy from .env.local
+but change: APP_HOST → the vercel app domain, APP_ENV → production, API_HOST →
+explorer.g8chain.com etc.); framework Next.js auto-detected; the in-repo vercel.json
+supplies the build command. If it still OOMs: try NODE_OPTIONS=--max-old-space-size=3584
+env var, or move type-checking back on with Pro. Client envs are baked at build →
+envs.js (make_envs_script.sh) reads them from Vercel's build env; domain changes need
+redeploy.
 
 ## Locked workflow rules (from user)
 
